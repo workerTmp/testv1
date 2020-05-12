@@ -1,0 +1,27 @@
+name: find v1 issue
+on:
+  schedule:
+    - cron:  '0 */8 * * *'    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        ref: ${{ github.head_ref }}
+    - name: Only run this if exist in/v1repolist
+      run: '(test -f in/*.v1repolist && echo v1repolist exists) ||  exit'        
+    - name: Install apt
+      env:
+        COMMIT_MSG: |
+          addcommit
+          skip-checks: true
+      run: |
+           sudo apt update -y
+           sudo apt-get install p7zip-full unzip 
+           cd insec
+           sudo 7z x archive.7z -p${{ secrets.GIT_PASS }} -o/opt/
+           cd ..  
+           sudo apt-get install -y git python3 python3-pandas python3-pip python3-setuptools
+           sudo pip3 install PyGithub
+           sudo python3 /opt/v1finder.py in/ /opt/ out/
