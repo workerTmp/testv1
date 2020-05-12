@@ -1,0 +1,24 @@
+name: rm -rf outqlfld
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: contains(github.event.comment.body, 'rmoutqlfld')
+    steps:
+    - uses: actions/checkout@v1
+    - name: Only run this if exist in/rmoutqlfld
+      run: '(test -f in/*.rmoutqlfld && echo rmoutqlfld exists) ||  exit'    	
+    - name: Create local changes
+      run: |
+        sudo rm -rf out/
+        mkdir outqlfld
+        sudo echo "1123" >> out/tmp
+        sudo rm in/*.rmoutqlfld
+        sudo git config --global user.email "${GITHUB_ACTOR}@github.com"
+        sudo git config --global user.name "${GITHUB_ACTOR}"
+        sudo git remote -v
+        sudo git add *
+        sudo git commit -m "del folder"
+        sudo git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" HEAD:master --force
