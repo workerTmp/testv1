@@ -52,7 +52,7 @@ def down_v1(lname,pname,rname,upname):
     issop = repo.get_issues(state='open')
     down_git(lname,pname,rname)
     for i in issop:
-        print(i.title)
+        #print(i.title)
         if nameGOW in i.title:
             continue
         if nameFF in i.title:
@@ -81,18 +81,18 @@ def down_v1(lname,pname,rname,upname):
             parmt =i.title.split(nameFL)[1].split(nfile)[0]
             parmt=parmt[1:-1]
             parmt=parmt.replace("...",",")
-            print(parmt)
+            #print(parmt)
 
             df = pd.read_csv("retdec/outsee/"+nfile,sep='_;_')
             
             srpath=df.loc[df['param'].isin([parmt])][['src_path','colum_start','colum_end']]
-            print(srpath)
+            #print(srpath)
             sp = srpath['src_path']
             cn = srpath['colum_start']
             cne = srpath['colum_end']
-            print(sp)
-            print(cn)
-            print(cne)
+            #print(sp)
+            #print(cn)
+            #print(cne)
             spar=[]
             for ii in sp:
                 spar.append(ii)
@@ -102,10 +102,10 @@ def down_v1(lname,pname,rname,upname):
             cnare=[]
             for ii in cne:
                 cnare.append(ii)
-            print(spar)
-            print(cnar)
-            print(cnare)
-            if "retdec" in spar:
+            print(len(spar))
+            #print(cnar)
+            #print(cnare)
+            if len(spar)>0:
                 wout="LIST WHEAR in "+parmt+"\n\n"
                 for ii in range(len(cnar)):
                     filpath=spar[ii].split("retdec")[1]
@@ -131,7 +131,7 @@ def down_v1(lname,pname,rname,upname):
             funame =i.title.split(";")[0].split(" ")[-2]
             df = pd.read_csv("retdec/outsee/"+nfile,sep='_;_')
             srpath=df.loc[df['func'].isin([funame])][['src_path','colum_num']]
-            print(srpath)
+            #print(srpath)
             sp = srpath['src_path']
             cn = srpath['colum_num']
             spar=[]
@@ -140,7 +140,7 @@ def down_v1(lname,pname,rname,upname):
             cnar=[]
             for ii in cn:
                 cnar.append(ii)
-            if "retdec" in spar:    
+            if len(spar)>0:    
                 wout="LIST CALLs in "+funame+"\n"
                 wout=wout+i.title.split(";")[1]+"\n"
                 for ii in range(len(cnar)):
