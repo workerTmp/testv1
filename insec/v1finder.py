@@ -60,7 +60,7 @@ def down_v1(lname,pname,rname,upname):
             nfile =i.title.split(";")[0].split(" ")[-1]
             funame =i.title.split(";")[0].split(" ")[-2]
             df = pd.read_csv("retdec/outsee/"+nfile,sep='_;_')
-            srpath=df.loc[df['func'].isin([funame])]['src_path'].unique()[0]#[1]?
+            srpath=df.loc[df['func'].isin([funame])]['src_path'].unique()[0]
             i1path=df.loc[df['func'].isin([funame])]['colum_start'].unique()[0]
             i2path=df.loc[df['func'].isin([funame])]['colum_end'].unique()[0]
             if "retdec" in srpath:
@@ -81,8 +81,12 @@ def down_v1(lname,pname,rname,upname):
             parmt =i.title.split(nameFL)[1].split(nfile)[0]
             parmt=parmt[1:-1]
             parmt=parmt.replace("...",",")
+            print(parmt)
+
             df = pd.read_csv("retdec/outsee/"+nfile,sep='_;_')
+            
             srpath=df.loc[df['param'].isin([parmt])][['src_path','colum_start','colum_end']]
+            print(srpath)
             sp = srpath['src_path']
             cn = srpath['colum_start']
             cne = srpath['colum_end']
@@ -121,6 +125,7 @@ def down_v1(lname,pname,rname,upname):
             funame =i.title.split(";")[0].split(" ")[-2]
             df = pd.read_csv("retdec/outsee/"+nfile,sep='_;_')
             srpath=df.loc[df['func'].isin([funame])][['src_path','colum_num']]
+            print(srpath)
             sp = srpath['src_path']
             cn = srpath['colum_num']
             spar=[]
