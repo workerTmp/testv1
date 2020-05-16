@@ -78,7 +78,7 @@ def down_v1(lname,pname,rname,upname):
             i.edit(title=nameGOW+d1+"_"+i.title,body=i.body+wout)         
         elif nameFL in i.title:
             nfile =i.title.split(";")[0].split(" ")[-1]
-            parmt =i.title.split("FL")[1].split(nfile)[0]
+            parmt =i.title.split(nameFL)[1].split(nfile)[0]
             parmt=parmt[1:-1]
             parmt=parmt.replace("...",",")
             print(nfile)
