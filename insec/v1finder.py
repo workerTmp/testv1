@@ -108,6 +108,8 @@ def down_v1(lname,pname,rname,upname):
             if len(spar)>0:
                 wout="LIST WHEAR in "+parmt+"\n\n"
                 for ii in range(len(cnar)):
+                    if "retdec" not in spar[ii]:
+                        continue
                     filpath=spar[ii].split("retdec")[1]
                     i1=cnar[ii]
                     if i1 >5:
@@ -144,6 +146,8 @@ def down_v1(lname,pname,rname,upname):
                 wout="LIST CALLs in "+funame+"\n"
                 wout=wout+i.title.split(";")[1]+"\n"
                 for ii in range(len(cnar)):
+                    if "retdec" not in spar[ii]:
+                        continue
                     filpath=spar[ii].split("retdec")[1]
                     #print(spar[ii])
                     #print(cnar[ii])
