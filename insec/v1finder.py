@@ -81,15 +81,11 @@ def down_v1(lname,pname,rname,upname):
             parmt =i.title.split(nameFL)[1].split(nfile)[0]
             parmt=parmt[1:-1]
             parmt=parmt.replace("...",",")
-            print(nfile)
-            print(parmt)
             df = pd.read_csv("retdec/outsee/"+nfile,sep='_;_')
             srpath=df.loc[df['param'].isin([parmt])][['src_path','colum_start','colum_end']]
             sp = srpath['src_path']
             cn = srpath['colum_start']
             cne = srpath['colum_end']
-            print(sp)
-            print(cn)
             spar=[]
             for ii in sp:
                 spar.append(ii)
