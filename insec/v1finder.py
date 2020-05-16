@@ -158,7 +158,9 @@ def down_v1(lname,pname,rname,upname):
                             cc+=1
                         if i2>=cc:
                             i2=cc-1
-                         
+                        print(i1)
+                        print(i2)
+                        print(cc)
                         for line in islice(lines, i1,i2):
                             wout = wout+line
                     wout=wout+"```"
