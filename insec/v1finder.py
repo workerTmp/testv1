@@ -156,8 +156,8 @@ def down_v1(lname,pname,rname,upname):
                         cc=0
                         for line in lines:
                             cc+=1
-                        if i2>cc:
-                            i2=cc
+                        if i2>=cc:
+                            i2=cc-1
                          
                         for line in islice(lines, i1,i2):
                             wout = wout+line
