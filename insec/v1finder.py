@@ -145,8 +145,8 @@ def down_v1(lname,pname,rname,upname):
                 wout=wout+i.title.split(";")[1]+"\n"
                 for ii in range(len(cnar)):
                     filpath=spar[ii].split("retdec")[1]
-                    print(spar[ii])
-                    print(cnar[ii])
+                    #print(spar[ii])
+                    #print(cnar[ii])
                     if cnar[ii]>5:
                         i1=cnar[ii]-5
                     else:
@@ -154,17 +154,19 @@ def down_v1(lname,pname,rname,upname):
                     i2=cnar[ii]+5
                     wout=wout+"\n\n"+filpath+":"+str(cnar[ii])
                     wout=wout+"\n"+"```cpp\n"
+                    i1=int(i1)
+                    i2=int(i2)
                     with open("retdec"+filpath,'r') as lines:
-                        cc=0
-                        for line1 in lines:
-                            cc+=1
-                        if i2>=cc:
-                            i2=cc-1
-                        i1=int(i1)
-                        i2=int(i2)
-                        print(i1)
-                        print(i2)
-                        print(cc)
+                        #cc=0
+                        #for line1 in lines:
+                        #    cc+=1
+                        #if i2>=cc:
+                        #    i2=cc-1
+                        #i1=int(i1)
+                        #i2=int(i2)
+                        #print(i1)
+                        #print(i2)
+                        #print(cc)
                         for line in islice(lines, i1,i2):
                             wout = wout+line
                     wout=wout+"```"
