@@ -145,6 +145,8 @@ def down_v1(lname,pname,rname,upname):
                 wout=wout+i.title.split(";")[1]+"\n"
                 for ii in range(len(cnar)):
                     filpath=spar[ii].split("retdec")[1]
+                    print(spar[ii])
+                    print(cnar[ii])
                     if cnar[ii]>5:
                         i1=cnar[ii]-5
                     else:
@@ -158,6 +160,8 @@ def down_v1(lname,pname,rname,upname):
                             cc+=1
                         if i2>=cc:
                             i2=cc-1
+                        i1=int(i1)
+                        i2=int(i2)
                         print(i1)
                         print(i2)
                         print(cc)
