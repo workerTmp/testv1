@@ -63,7 +63,7 @@ def down_v1(lname,pname,rname,upname):
             srpath=df.loc[df['func'].isin([funame])]['src_path'].unique()[0]
             i1path=df.loc[df['func'].isin([funame])]['colum_start'].unique()[0]
             i2path=df.loc[df['func'].isin([funame])]['colum_end'].unique()[0]
-            if len(spath)>0:
+            if "retdec" in spath:
                 filpath=srpath.split("retdec")[1]
                 i1=int(i1path)
                 i2=int(i2path)
@@ -153,6 +153,12 @@ def down_v1(lname,pname,rname,upname):
                     wout=wout+"\n\n"+filpath+":"+str(cnar[ii])
                     wout=wout+"\n"+"```cpp\n"
                     with open("retdec"+filpath,'r') as lines:
+                        cc=0
+                        for line in lines:
+                            cc+=1
+                        if i2>cc:
+                            i2=cc
+                         
                         for line in islice(lines, i1,i2):
                             wout = wout+line
                     wout=wout+"```"
