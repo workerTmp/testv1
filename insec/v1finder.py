@@ -52,7 +52,7 @@ def down_v1(lname,pname,rname,upname):
     issop = repo.get_issues(state='open')
     down_git(lname,pname,rname)
     for i in issop:
-        #print(i.title)
+        print(i.title)
         if nameGOW in i.title:
             continue
         if nameFF in i.title:
@@ -63,7 +63,7 @@ def down_v1(lname,pname,rname,upname):
             srpath=df.loc[df['func'].isin([funame])]['src_path'].unique()[0]
             i1path=df.loc[df['func'].isin([funame])]['colum_start'].unique()[0]
             i2path=df.loc[df['func'].isin([funame])]['colum_end'].unique()[0]
-            if "retdec" in srpath:
+            if len(spath)>0:
                 filpath=srpath.split("retdec")[1]
                 i1=int(i1path)
                 i2=int(i2path)
