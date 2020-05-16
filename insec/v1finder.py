@@ -156,7 +156,7 @@ def down_v1(lname,pname,rname,upname):
                     wout=wout+"\n"+"```cpp\n"
                     with open("retdec"+filpath,'r') as lines:
                         cc=0
-                        for line in lines:
+                        for line1 in lines:
                             cc+=1
                         if i2>=cc:
                             i2=cc-1
