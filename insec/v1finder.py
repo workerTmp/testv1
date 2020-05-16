@@ -90,6 +90,9 @@ def down_v1(lname,pname,rname,upname):
             sp = srpath['src_path']
             cn = srpath['colum_start']
             cne = srpath['colum_end']
+            print(sp)
+            print(cn)
+            print(cne)
             spar=[]
             for ii in sp:
                 spar.append(ii)
@@ -99,6 +102,9 @@ def down_v1(lname,pname,rname,upname):
             cnare=[]
             for ii in cne:
                 cnare.append(ii)
+            print(spar)
+            print(cnar)
+            print(cnare)
             if "retdec" in spar:
                 wout="LIST WHEAR in "+parmt+"\n\n"
                 for ii in range(len(cnar)):
