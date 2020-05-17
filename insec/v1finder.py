@@ -89,8 +89,8 @@ def down_v1(lname,pname,rname,upname):
                     else:
                         i1=0
                     i2=cnare[ii]
-                    i1=int(i1path)
-                    i2=int(i2path)
+                    i1=int(i1)
+                    i2=int(i2)
                     wout=wout+"\n\n"+filpath+":"+str(i1)+"::"+str(i2)
                     wout=wout+"\n"+"```cpp\n"
                     with open("retdec"+filpath,'r') as lines:
