@@ -44,9 +44,9 @@ def down_v1(lname,pname,rname,upname):
                 #-FF namefunc namefile param;
     nameFC="FC" #find call 
                 #FCF namefunc namefile;
-    nameFL="FLIF" #find loop or if or func on param (ВОЗМОЖНО НЕ ПОЛНОЕ СОВПАДЕНИЕ...)
+    nameFL="FLI" #find loop or if or on param (ВОЗМОЖНО НЕ ПОЛНОЕ СОВПАДЕНИЕ...)
                 #FCF param namefile;
-           
+    nameFFP = "FFP"       
     nameGOW="GOW"
     repo = g.get_repo(lname+"/"+rname)
     issop = repo.get_issues(state='open')
@@ -56,21 +56,47 @@ def down_v1(lname,pname,rname,upname):
         if nameGOW in i.title:
             continue
         if nameFF in i.title:
-            wout = "```cpp\n"
             nfile =i.title.split(";")[0].split(" ")[-1]
             funame =i.title.split(";")[0].split(" ")[-2]
             df = pd.read_csv("retdec/outsee/"+nfile,sep='_;_')
-            srpath=df.loc[df['func'].isin([funame])]['src_path'].unique()[0]
-            i1path=df.loc[df['func'].isin([funame])]['colum_start'].unique()[0]
-            i2path=df.loc[df['func'].isin([funame])]['colum_end'].unique()[0]
-            if "retdec" in srpath:
-                filpath=srpath.split("retdec")[1]
-                i1=int(i1path)
-                i2=int(i2path)
-                with open("retdec"+filpath,'r') as lines:
-                    for line in islice(lines, i1-1,i2):
-                        wout = wout+line
-                wout=wout+"```"
+            srpath=df.loc[df['func'].isin([funame])][['src_path','colum_start','colum_end']]
+            
+            #srpath=df.loc[df['func'].isin([funame])]['src_path'].unique()[0]
+            #i1path=df.loc[df['func'].isin([funame])]['colum_start'].unique()[0]
+            #i2path=df.loc[df['func'].isin([funame])]['colum_end'].unique()[0]
+            #if "retdec" in srpath:
+            sp = srpath['src_path']
+            cn = srpath['colum_start']
+            cne = srpath['colum_end']
+            spar=[]
+            for ii in sp:
+                spar.append(ii)
+            cnar=[]
+            for ii in cn:
+                cnar.append(ii)
+            cnare=[]
+            for ii in cne:
+                cnare.append(ii)
+            if len(spar)>0:
+                wout="FunDic in param "+parmt+"\n\n"
+                for ii in range(len(cnar)):
+                    if "retdec" not in spar[ii]:
+                        continue
+                    filpath=spar[ii].split("retdec")[1]
+                    i1=cnar[ii]
+                    if i1 >5:
+                        i1 = i1-5
+                    else:
+                        i1=0
+                    i2=cnare[ii]
+                    i1=int(i1path)
+                    i2=int(i2path)
+                    wout=wout+"\n\n"+filpath+":"+str(i1)+"::"+str(i2)
+                    wout=wout+"\n"+"```cpp\n"
+                    with open("retdec"+filpath,'r') as lines:
+                        for line in islice(lines, i1,i2):
+                            wout = wout+line
+                    wout=wout+"```"
             else:
                 wout="\nNO DATA\n"
             today = date.today()
@@ -86,13 +112,9 @@ def down_v1(lname,pname,rname,upname):
             df = pd.read_csv("retdec/outsee/"+nfile,sep='_;_')
             
             srpath=df.loc[df['param'].isin([parmt])][['src_path','colum_start','colum_end']]
-            #print(srpath)
             sp = srpath['src_path']
             cn = srpath['colum_start']
             cne = srpath['colum_end']
-            #print(sp)
-            #print(cn)
-            #print(cne)
             spar=[]
             for ii in sp:
                 spar.append(ii)
@@ -102,9 +124,6 @@ def down_v1(lname,pname,rname,upname):
             cnare=[]
             for ii in cne:
                 cnare.append(ii)
-            print(len(spar))
-            #print(cnar)
-            #print(cnare)
             if len(spar)>0:
                 wout="LIST WHEAR in "+parmt+"\n\n"
                 for ii in range(len(cnar)):
@@ -161,16 +180,49 @@ def down_v1(lname,pname,rname,upname):
                     i1=int(i1)
                     i2=int(i2)
                     with open("retdec"+filpath,'r') as lines:
-                        #cc=0
-                        #for line1 in lines:
-                        #    cc+=1
-                        #if i2>=cc:
-                        #    i2=cc-1
-                        #i1=int(i1)
-                        #i2=int(i2)
-                        #print(i1)
-                        #print(i2)
-                        #print(cc)
+#todo if i2 end more error see
+                        for line in islice(lines, i1,i2):
+                            wout = wout+line
+                    wout=wout+"```"
+            else:
+                wout="\nNO DATA\n"
+            today = date.today()
+            d1 = today.strftime("%d.%m.%Y")
+            i.edit(title=nameGOW+d1+"_"+i.title,body=i.body+"\n"+wout)     
+        elif nameFFP in i.title:
+            nfile =i.title.split(";")[0].split(" ")[-1]
+            parmt =i.title.split(nameFFP)[1].split(nfile)[0]
+            parmt=parmt[1:-1]
+            parmt=parmt.replace("...",",")
+            #print(parmt)
+            df = pd.read_csv("retdec/outsee/"+nfile,sep='_;_')
+            srpath=df.loc[df['param'].isin([parmt])][['src_path','colum_num']]
+            #print(srpath)
+            sp = srpath['src_path']
+            cn = srpath['colum_num']
+            spar=[]
+            for ii in sp:
+                spar.append(ii)
+            cnar=[]
+            for ii in cn:
+                cnar.append(ii)
+            if len(spar)>0:    
+                wout="LIST CALLs in "+funame+"\n"
+                wout=wout+i.title.split(";")[1]+"\n"
+                for ii in range(len(cnar)):
+                    if "retdec" not in spar[ii]:
+                        continue
+                    filpath=spar[ii].split("retdec")[1]
+                    if cnar[ii]>5:
+                        i1=cnar[ii]-5
+                    else:
+                        i1=0
+                    i2=cnar[ii]+5
+                    wout=wout+"\n\n"+filpath+":"+str(cnar[ii])
+                    wout=wout+"\n"+"```cpp\n"
+                    i1=int(i1)
+                    i2=int(i2)
+                    with open("retdec"+filpath,'r') as lines:
                         for line in islice(lines, i1,i2):
                             wout = wout+line
                     wout=wout+"```"
