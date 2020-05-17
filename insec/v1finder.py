@@ -63,7 +63,7 @@ def down_v1(lname,pname,rname,upname):
             srpath=df.loc[df['func'].isin([funame])]['src_path'].unique()[0]
             i1path=df.loc[df['func'].isin([funame])]['colum_start'].unique()[0]
             i2path=df.loc[df['func'].isin([funame])]['colum_end'].unique()[0]
-            if "retdec" in spath:
+            if "retdec" in srpath:
                 filpath=srpath.split("retdec")[1]
                 i1=int(i1path)
                 i2=int(i2path)
