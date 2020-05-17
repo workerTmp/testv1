@@ -78,7 +78,7 @@ def down_v1(lname,pname,rname,upname):
             for ii in cne:
                 cnare.append(ii)
             if len(spar)>0:
-                wout="FunDic in param "+parmt+"\n\n"
+                wout="FunDic "+funame+"\n\n"
                 for ii in range(len(cnar)):
                     if "retdec" not in spar[ii]:
                         continue
