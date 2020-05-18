@@ -207,7 +207,7 @@ def down_v1(lname,pname,rname,upname):
             for ii in cn:
                 cnar.append(ii)
             if len(spar)>0:    
-                wout="LIST CALLs in "+funame+"\n"
+                wout="LIST CALLs in "+parmt+"\n"
                 wout=wout+i.title.split(";")[1]+"\n"
                 for ii in range(len(cnar)):
                     if "retdec" not in spar[ii]:
