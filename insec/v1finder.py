@@ -84,12 +84,13 @@ def down_v1(lname,pname,rname,upname):
                         continue
                     filpath=spar[ii].split("retdec")[1]
                     i1=cnar[ii]
+                    i1= int(i1)
                     if i1 >5:
                         i1 = i1-5
                     else:
                         i1=0
                     i2=cnare[ii]
-                    i1=int(i1)
+                    
                     i2=int(i2)
                     wout=wout+"\n\n"+filpath+":"+str(i1)+"::"+str(i2)
                     wout=wout+"\n"+"```cpp\n"
@@ -131,11 +132,13 @@ def down_v1(lname,pname,rname,upname):
                         continue
                     filpath=spar[ii].split("retdec")[1]
                     i1=cnar[ii]
+                    i1=int(i1)
                     if i1 >5:
                         i1 = i1-5
                     else:
                         i1=0
                     i2=cnare[ii]
+                    i2=int(i2)
                     wout=wout+"\n\n"+filpath+":"+str(i1)+"::"+str(i2)
                     wout=wout+"\n"+"```cpp\n"
                     with open("retdec"+filpath,'r') as lines:
@@ -170,15 +173,18 @@ def down_v1(lname,pname,rname,upname):
                     filpath=spar[ii].split("retdec")[1]
                     #print(spar[ii])
                     #print(cnar[ii])
-                    if cnar[ii]>5:
-                        i1=cnar[ii]-5
+                    i1=cnar[ii]
+                    i1=int(i1)
+                    if i1>5:
+                        i1=i1-5
                     else:
                         i1=0
-                    i2=cnar[ii]+5
+                    i2=cnar[ii]
+                    i2=int(i2)+5
                     wout=wout+"\n\n"+filpath+":"+str(cnar[ii])
                     wout=wout+"\n"+"```cpp\n"
-                    i1=int(i1)
-                    i2=int(i2)
+                    
+                    
                     with open("retdec"+filpath,'r') as lines:
 #todo if i2 end more error see
                         for line in islice(lines, i1,i2):
@@ -213,15 +219,18 @@ def down_v1(lname,pname,rname,upname):
                     if "retdec" not in spar[ii]:
                         continue
                     filpath=spar[ii].split("retdec")[1]
-                    if cnar[ii]>5:
-                        i1=cnar[ii]-5
+                    i1=cnar[ii]
+                    i1=int(i1)
+                    if i1>5:
+                        i1=i1-5
                     else:
                         i1=0
-                    i2=cnar[ii]+5
+                    i2=cnar[ii]
+                    i2=int(i2)
                     wout=wout+"\n\n"+filpath+":"+str(cnar[ii])
                     wout=wout+"\n"+"```cpp\n"
-                    i1=int(i1)
-                    i2=int(i2)
+                    
+                    
                     with open("retdec"+filpath,'r') as lines:
                         for line in islice(lines, i1,i2):
                             wout = wout+line
