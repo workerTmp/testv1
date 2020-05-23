@@ -78,7 +78,7 @@ def down_v1(lname,pname,rname,upname):
             for ii in cne:
                 cnare.append(ii)
             if len(spar)>0:
-                wout="FunDic "+funame+"\n\n"
+                wout="\nFunDic "+funame+"\n\n"
                 for ii in range(len(cnar)):
                     if "retdec" not in spar[ii]:
                         continue
@@ -126,7 +126,7 @@ def down_v1(lname,pname,rname,upname):
             for ii in cne:
                 cnare.append(ii)
             if len(spar)>0:
-                wout="LIST WHEAR in "+parmt+"\n\n"
+                wout="\nLIST WHEAR in "+parmt+"\n\n"
                 for ii in range(len(cnar)):
                     if "retdec" not in spar[ii]:
                         continue
@@ -144,7 +144,7 @@ def down_v1(lname,pname,rname,upname):
                     with open("retdec"+filpath,'r') as lines:
                         for line in islice(lines, i1,i2):
                             wout = wout+line
-                    wout=wout+"```"
+                    wout=wout+"\n```\n"
             else:
                 wout="\n NO DATA \n"
             today = date.today()
@@ -165,7 +165,7 @@ def down_v1(lname,pname,rname,upname):
             for ii in cn:
                 cnar.append(ii)
             if len(spar)>0:    
-                wout="LIST CALLs in "+funame+"\n"
+                wout="\nLIST CALLs in "+funame+"\n"
                 wout=wout+i.title.split(";")[1]+"\n"
                 for ii in range(len(cnar)):
                     if "retdec" not in spar[ii]:
@@ -182,14 +182,14 @@ def down_v1(lname,pname,rname,upname):
                     i2=cnar[ii]
                     i2=int(i2)+5
                     wout=wout+"\n\n"+filpath+":"+str(cnar[ii])
-                    wout=wout+"\n"+"```cpp\n"
+                    wout=wout+"\n```cpp\n"
                     
                     
                     with open("retdec"+filpath,'r') as lines:
 #todo if i2 end more error see
                         for line in islice(lines, i1,i2):
                             wout = wout+line
-                    wout=wout+"```"
+                    wout=wout+"\n```\n"
             else:
                 wout="\nNO DATA\n"
             today = date.today()
@@ -213,7 +213,7 @@ def down_v1(lname,pname,rname,upname):
             for ii in cn:
                 cnar.append(ii)
             if len(spar)>0:    
-                wout="LIST CALLs in "+parmt+"\n"
+                wout="\nLIST CALLs in "+parmt+"\n"
                 wout=wout+i.title.split(";")[1]+"\n"
                 for ii in range(len(cnar)):
                     if "retdec" not in spar[ii]:
@@ -234,7 +234,7 @@ def down_v1(lname,pname,rname,upname):
                     with open("retdec"+filpath,'r') as lines:
                         for line in islice(lines, i1,i2):
                             wout = wout+line
-                    wout=wout+"```"
+                    wout=wout+"\n```\n"
             else:
                 wout="\nNO DATA\n"
             today = date.today()
