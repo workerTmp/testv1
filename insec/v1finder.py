@@ -351,7 +351,10 @@ if os.path.exists(path_to_in+"list.v1repolist"):
             pname = fpass_name
         else:
             pname="nonono"
-        down_v1(lname,pname,rname,unzip_name)
+        try:
+            down_v1(lname,pname,rname,unzip_name)
+        except:
+            print("Exception error ",sys.exc_info()[0])
         save_repo(logi_name,pass_name,retpo_name,path_to_out)
 else:
     print("NO LIST.v1repolist FILE")
