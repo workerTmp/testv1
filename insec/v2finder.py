@@ -323,6 +323,7 @@ def down_v1(lname,pname,rname,upname):
             sourceFunc=""
             sourceExtr=""
             foldPrj = "/opt/foldprj"
+            preline = ""
             for ll in i.body.split("\n"):
                 if FlagForFolder in i:
                     foldPrj=i.split(FlagForFolder)[1]
@@ -350,13 +351,15 @@ def down_v1(lname,pname,rname,upname):
                     continue
                 if "makeline " in i:
                     shPredInst+"\n"+i.split("makeline ")[1]
-                    continue
-			    shPredInst +="\n sudo python3 insec/libAdd.py "+foldPrj            
+                    continue                  
+            shPredInst +="\n sudo python3 insec/libAdd.py "+foldPrj            
             typecnc = i.title.split(" ")[0].split(nameVRA)[1]
             fyname = i.title.split(";")[0].split(" ")[1]
             today = date.today()
             fname = lname+"_"+rname+"_"+fyname+"_"+today.strftime("%d.%m.%Y")+typecnc
-            preline= sourceInclude+"\n"+sourceDefine+"\n"+sourceType+"\n"+sourceExtr+"\n"+sourceFunc
+            if sourceDefine in "":
+                sourceDefine="#define MAX_LEN 1024"
+            preline= sourceInclude+"\n"+sourceDefine+"\n"+sourceType+"\n"+sourceExtr+"\n int sanitize_cookie_path(char *buf,size_t len){\n"+sourceFunc
             with open(fname,"a") as f:
                 f.write(preline)
             fname1 = lname+"_"+rname+"_"+fyname+"_"+today.strftime("%d.%m.%Y")+typecnc+".sh"
