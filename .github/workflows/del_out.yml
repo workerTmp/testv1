@@ -13,7 +13,7 @@ jobs:
     - name: Create local changes
       run: |
         sudo rm -rf out/
-        mkdir outqlfld
+        mkdir out
         sudo echo "1123" >> out/tmp
         sudo rm in/*.rmoutqlfld
         sudo git config --global user.email "${GITHUB_ACTOR}@github.com"
