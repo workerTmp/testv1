@@ -325,32 +325,32 @@ def down_v1(lname,pname,rname,upname):
             foldPrj = "/opt/foldprj"
             preline = ""
             for ll in i.body.split("\n"):
-                if FlagForFolder in i:
-                    foldPrj=i.split(FlagForFolder)[1]
+                if FlagForFolder in ll:
+                    foldPrj=ll.split(FlagForFolder)[1]
                     continue
-                if not FlagForTasks in i:
-                    if "include" in i:
-                        sourceInclude +="\n"+i
+                if not FlagForTasks in ll:
+                    if "include" in ll:
+                        sourceInclude +="\n"+ll
                         continue                
-                    if "define" in i:
-                        sourceDefine +="\n"+i
+                    if "define" in ll:
+                        sourceDefine +="\n"+ll
                         continue
-                    if "typedef" in i:
-                        sourceType +="\n"+i
+                    if "typedef" in ll:
+                        sourceType +="\n"+ll
                         continue
-                    if "extern" in i:
-                        sourceExtr +="\n"+i
+                    if "extern" in ll:
+                        sourceExtr +="\n"+ll
                         continue
-                    sourceFunc+="\n"+i
+                    sourceFunc+="\n"+ll
                     continue
-                if "sudo apt" in i:
-                    shPredInst+="\n"+i.split(FlagForTasks)[1]
+                if "sudo apt" in ll:
+                    shPredInst+="\n"+ll.split(FlagForTasks)[1]
                     continue
-                if "git clone" in i:
-                    shPredInst+="\n"+i.split(FlagForTasks)[1]
+                if "git clone" in ll:
+                    shPredInst+="\n"+ll.split(FlagForTasks)[1]
                     continue
-                if "makeline " in i:
-                    shPredInst+"\n"+i.split("makeline ")[1]
+                if "makeline " in ll:
+                    shPredInst+"\n"+ll.split("makeline ")[1]
                     continue                  
             shPredInst +="\n sudo python3 insec/libAdd.py "+foldPrj            
             typecnc = i.title.split(" ")[0].split(nameVRA)[1]
