@@ -350,7 +350,7 @@ def down_v1(lname,pname,rname,upname):
                     shPredInst+="\n"+ll.split(FlagForTasks)[1]
                     continue
                 if "makeline " in ll:
-                    shPredInst+"\n"+ll.split("makeline ")[1]
+                    shPredInst+="\n"+ll.split("makeline ")[1]
                     continue                  
             shPredInst +="\n sudo python3 insec/libAdd.py "+foldPrj            
             typecnc = i.title.split(" ")[0].split(nameVRA)[1]
