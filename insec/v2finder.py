@@ -39,7 +39,7 @@ def down_v1(lname,pname,rname,upname):
                #VN.c1c aslkdjfkasjdf
     nameVR="VR" #verinica raw 
                 #VR.c1c filename;
-    nameVRA="VRA" #veronica in other project link lib
+    nameVRA="AVA" #veronica in other project link lib
                     #VRA.c2c name;
                     #in body many instruction
     nameFF="FFD" #find function declaration 
