@@ -322,7 +322,7 @@ def down_v1(lname,pname,rname,upname):
             sourceInclude=""
             sourceFunc=""
             sourceExtr=""
-            foldPrj = "/opt/foldprj"
+            foldPrj = "/opt/foldprj/"
             preline = ""
             for ll in i.body.split("\n"):
                 if FlagForFolder in ll:
