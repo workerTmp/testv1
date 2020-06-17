@@ -316,7 +316,7 @@ def down_v1(lname,pname,rname,upname):
         elif nameVRA in i.title:
             FlagForTasks="#CREATE#"
             FlagForFolder ="#FOLDPROJ#"
-            shPredInst = "#!/bin/bash \n"
+            shPredInst = ""
             sourceType=""
             sourceDefine=""
             sourceInclude=""
@@ -350,7 +350,7 @@ def down_v1(lname,pname,rname,upname):
                     shPredInst+="\n"+ll.split(FlagForTasks)[1]+" "+foldPrj
                     continue
                 if "makeline " in ll:
-                    shPredInst+="\n"+"cd "+foldPrj+ll.split("makeline ")[1]
+                    shPredInst+="\n"+"cd "+foldPrj+" && "+ll.split("makeline ")[1]
                     continue                  
             shPredInst +="\n sudo python3 insec/libAdd.py "+foldPrj            
             typecnc = i.title.split(" ")[0].split(nameVRA)[1]
