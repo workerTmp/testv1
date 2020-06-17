@@ -343,14 +343,14 @@ def down_v1(lname,pname,rname,upname):
                         continue
                     sourceFunc+="\n"+ll
                     continue
-                if "sudo apt" in ll:
+                if "sudo apt-get" in ll:
                     shPredInst+="\n"+ll.split(FlagForTasks)[1]
                     continue
                 if "git clone" in ll:
-                    shPredInst+="\n"+ll.split(FlagForTasks)[1]
+                    shPredInst+="\n"+ll.split(FlagForTasks)[1]+" "+foldPrj
                     continue
                 if "makeline " in ll:
-                    shPredInst+="\n"+ll.split("makeline ")[1]
+                    shPredInst+="\n"+"cd "+foldPrj+ll.split("makeline ")[1]
                     continue                  
             shPredInst +="\n sudo python3 insec/libAdd.py "+foldPrj            
             typecnc = i.title.split(" ")[0].split(nameVRA)[1]
