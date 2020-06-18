@@ -332,12 +332,12 @@ def down_v1(lname,pname,rname,upname):
                 if not FlagForTasks in ll:
                     if "include" in ll:
                         sourceInclude +="\n"+ll
-                        continue                
-                    if "define" in ll:
-                        sourceDefine +="\n"+ll
                         continue
                     if FlagForType in ll:
                         sourceType +="\n"+ll.split(FlagForType)[1]
+                        continue                        
+                    if "define" in ll:
+                        sourceDefine +="\n"+ll
                         continue
                     if "extern" in ll:
                         sourceExtr +="\n"+ll
