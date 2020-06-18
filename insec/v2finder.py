@@ -315,6 +315,7 @@ def down_v1(lname,pname,rname,upname):
                     i.edit(title=nameGOW+d1+"_"+i.title)
         elif nameVRA in i.title:
             FlagForTasks="#CREATE#"
+            FlagForType="#TYPE#"
             FlagForFolder ="#FOLDPROJ#"
             shPredInst = ""
             sourceType=""
@@ -335,8 +336,8 @@ def down_v1(lname,pname,rname,upname):
                     if "define" in ll:
                         sourceDefine +="\n"+ll
                         continue
-                    if "typedef" in ll:
-                        sourceType +="\n"+ll
+                    if FlagForType in ll:
+                        sourceType +="\n"+ll.split(FlagForType)[1]
                         continue
                     if "extern" in ll:
                         sourceExtr +="\n"+ll
