@@ -328,6 +328,7 @@ def down_v1(lname,pname,rname,upname):
             for ll in i.body.split("\n"):
                 if FlagForFolder in ll:
                     foldPrj=ll.split(FlagForFolder)[1]
+                    foldPrj=foldPrj.strip()
                     continue
                 if not FlagForTasks in ll:
                     if "include" in ll:
@@ -352,7 +353,7 @@ def down_v1(lname,pname,rname,upname):
                     continue
                 if "makeline " in ll:
                     shPredInst+="\n"+"cd "+foldPrj+" && "+ll.split("makeline ")[1]
-                    continue                  
+                    continue 
             shPredInst +="\n sudo python3 insec/libAdd.py "+foldPrj            
             typecnc = i.title.split(" ")[0].split(nameVRA)[1]
             fyname = i.title.split(";")[0].split(" ")[1]
