@@ -55,7 +55,7 @@ def down_v1(lname,pname,rname,upname):
     issop = repo.get_issues(state='open')
     down_git(lname,pname,rname)
     for i in issop:
-        print(i.title)
+        #print(i.title)
         if nameGOW in i.title:
             continue
         if nameFF in i.title:
