@@ -349,7 +349,7 @@ def down_v1(lname,pname,rname,upname):
                     shPredInst+="\n"+ll.split(FlagForTasks)[1]
                     continue
                 if "git clone" in ll:
-                    shPredInst+="\n"+ll.split(FlagForTasks)[1]+" "+foldPrj
+                    shPredInst+="\n"+ll.split(FlagForTasks)[1].strip()+" "+foldPrj
                     continue
                 if "makeline " in ll:
                     shPredInst+="\n"+"cd "+foldPrj+" && "+ll.split("makeline ")[1]
