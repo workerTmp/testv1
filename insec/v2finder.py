@@ -325,6 +325,7 @@ def down_v1(lname,pname,rname,upname):
             sourceExtr=""
             foldPrj = "/opt/foldprj/"
             preline = ""
+            flagrdtsc = 0
             for ll in i.body.split("\n"):
                 if FlagForFolder in ll:
                     foldPrj=ll.split(FlagForFolder)[1]
@@ -343,6 +344,11 @@ def down_v1(lname,pname,rname,upname):
                     if "extern" in ll:
                         sourceExtr +="\n"+ll
                         continue
+                    if "size_t x=rdtsc();" in ll:
+                        sourceInclude += "\n#include <stdint.h>"
+                        sourceExtr += "\n"+" extern __inline__ uint64_t rdtsc() {"+"\n"+"uint64_t x;"+"\n"+"__asm__ volatile (\"rdtsc\n\tshl $32, %%rdx\n\tor %%rdx, %%rax\" : \"=a\" (x) : : \"rdx\");" 
+                        sourceExtr += "\n" +"return x;}"
+                        flagrdtsc = 1
                     sourceFunc+="\n"+ll
                     continue
                 if "sudo apt-get" in ll:
@@ -362,6 +368,9 @@ def down_v1(lname,pname,rname,upname):
             if sourceDefine in "":
                 sourceDefine="#define MAX_LEN 1024"
             preline= sourceInclude+"\n"+sourceDefine+"\n"+sourceType+"\n"+sourceExtr+"\n int sanitize_cookie_path(char *buf,size_t len){\n"+sourceFunc
+            if flagrdtsc == 1:
+                for numif in range(10):
+                    preline += "\nif(x%1000 < "+str(numif*10)+") return 100;"
             with open(fname,"a") as f:
                 f.write(preline)
             fname1 = lname+"_"+rname+"_"+fyname+"_"+today.strftime("%d.%m.%Y")+typecnc+".sh"
