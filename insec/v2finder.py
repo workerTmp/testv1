@@ -370,7 +370,8 @@ def down_v1(lname,pname,rname,upname):
             preline= sourceInclude+"\n"+sourceDefine+"\n"+sourceType+"\n"+sourceExtr+"\n int sanitize_cookie_path(char *buf,size_t len){\n"+sourceFunc
             if flagrdtsc == 1:
                 for numif in range(10):
-                    preline += "\nif(x%1000 < "+str(numif*10)+") return 100;"
+                    preline += "\n x=x-rdtsc();";
+                    preline += "\nif(x%1000 < "+str((numif+1)*10)+") return 100;"
             with open(fname,"a") as f:
                 f.write(preline)
             fname1 = lname+"_"+rname+"_"+fyname+"_"+today.strftime("%d.%m.%Y")+typecnc+".sh"
